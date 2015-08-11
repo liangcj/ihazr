@@ -1,0 +1,104 @@
+.axis path,
+.axis line{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+.axis text{
+    font-family: sans-serif;
+    font-size: 11px;
+}
+.y.axis.haz path,
+.y.axis.haz line{
+    stroke: rgba(255,90,0,1);
+}
+.y.axis.haz text{
+    fill: rgba(255,90,0,1);
+}
+.y.axis.NA path,
+.y.axis.NA line{
+    stroke: rgb(80,80,80);
+}
+.y.axis.NA text{
+    fill: rgb(80,80,80);
+}
+circle{
+    stroke: black;
+    stroke-width: 0px;
+}
+text{
+    font-family: Helvetica;
+}
+#myname{
+    font-family: "PT Sans", sans-serif;
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted rgb(100,100,100);
+    display: block;
+}
+#menu{
+    height: 60px;
+}
+body{
+    display: block;
+    position: relative;
+    width: 900px;
+    margin: 0px auto 0px auto;
+    background-color:rgb(220,220,220);
+    padding: 0px;
+    border: 0px;
+}
+h1{
+    width: 900px;
+    height: 80px;
+    display: block;
+}
+ul{
+    -webkit-padding-start: 0px;
+    text-align: center;
+}
+li{
+    display:inline-block;
+    font-family: "Roboto Slab", serif;
+    font-size: 24px;
+    color: rgb(100,100,100);
+    text-align: center;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+p{
+    font-family:"PT Sans";
+}
+#myname a:link,
+#myname a:visited,
+#myname a:hover,
+#myname a:active{
+    color: black;
+    text-decoration: none;
+}
+#menu ul li a:link,
+#menu ul li a:visited{
+    text-decoration: none;
+    color: rgb(100,100,100);
+}
+#menu ul li a:hover,
+#menu ul li a:active{
+    color: black;
+    text-decoration: none;
+}
+#time2bin{
+  cursor:normal;
+}
+svg{
+    cursor:crosshair;
+}
+svg.button{
+    cursor: pointer;
+}
+svg.scatter{
+    cursor: ew-resize;
+}
