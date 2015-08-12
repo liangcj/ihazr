@@ -5,13 +5,15 @@
 #' @import htmlwidgets
 #'
 #' @export
-ihazr <- function(message, width = NULL, height = NULL) {
+ihazr <- function(time, status, marker, width = NULL, height = NULL) {
 
   # forward options using x
-  x = list(
-    message = message
+  x <- data.frame(
+    time = time,
+    status = status,
+    marker = marker
   )
-
+  
   # create widget
   htmlwidgets::createWidget(
     name = 'ihazr',
