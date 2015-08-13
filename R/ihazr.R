@@ -8,12 +8,17 @@
 ihazr <- function(time, status, marker, width = NULL, height = NULL) {
 
   # forward options using x
-  x <- data.frame(
-    time = time,
-    status = status,
-    marker = marker
-  )
-  
+#  x <- data.frame(
+#    time = time,
+#    status = status,
+#    marker = marker
+#  )
+    x <- data.frame(
+      time = time,
+      status = status
+    )
+    x <- cbind(x, marker)
+    x <- x[order(x$time), ]
   # create widget
   htmlwidgets::createWidget(
     name = 'ihazr',

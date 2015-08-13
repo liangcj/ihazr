@@ -17,16 +17,20 @@ HTMLWidgets.widget({
   renderValue: function(el, x, instance) {
     var data = HTMLWidgets.dataframeToD3(x);
     var pad = 30;
+//    var w = el.attr("width");
+//    var h = el.attr("height");
+    var w = 900;
+    var h = 400;
 
-//    var svgbut = d3.select("body")
-//        .append("svg")
-//            .attr("class", "button")
-//            .attr("width", w)
-//            .attr("height", h/5)
+    var svgbut = d3.select(el)
+        .select("svg")
+            .attr("class", "button")
+            .attr("width", w)
+            .attr("height", h/5);
 
-    var svg = d3.select(el).select("svg");
-    var w = svg.attr("width");
-    var h = svg.attr("height");
+    var svg = d3.select(el).append("svg")
+                     .attr("width", w)
+                     .attr("height", h);
 //            .attr("class", "scatter")
 //            .attr("width", w)
 //            .attr("height", h);
@@ -35,6 +39,10 @@ HTMLWidgets.widget({
 //            .attr("class", "scatter")
 //            .attr("width", w)
 //            .attr("height", h)
+    var svghud = d3.select(el).append("svg")
+                     .attr("class", "hud")
+                     .attr("width", w)
+                     .attr("height", h/10);
 //    var svghud = d3.select("body")
 //        .append("svg")
 //            .attr("class", "hud")
@@ -51,7 +59,7 @@ HTMLWidgets.widget({
     var datasub = [];
     var mouse = [900,200];
     var mouseold = [900,200];
-    var cc = "marker";
+    var cc = "age";
     var freeze = 0;
     var refresh = 0;
 
@@ -105,7 +113,7 @@ HTMLWidgets.widget({
             mouse = d3.mouse(this);
         });
 
-/*        svgbut.selectAll(".rect.buttons")
+        svgbut.selectAll(".rect.buttons")
                 .data(d3.keys(data[1]).slice(2, d3.keys(data[1]).length))
                 .enter()
             .append("rect")
@@ -134,7 +142,7 @@ HTMLWidgets.widget({
                 .style("font-weight", "bold")
                 .style("font-family", "Courier")
                 .style("font-size", "20px")
-                .text(function(d){return d;}); */
+                .text(function(d){return d;}); 
         svg.selectAll("circle")
                 .data(data)
                 .enter()
@@ -199,7 +207,7 @@ HTMLWidgets.widget({
         var khedata = khe(datasub);
 
         // BEGIN VERY MESSY LEGEND CODE
-/*        svghud.append("rect")
+        svghud.append("rect")
                 .attr("x", pad)
                 .attr("y", pad/4)
                 .attr("width", w/2.35)
@@ -210,7 +218,7 @@ HTMLWidgets.widget({
                 .attr("x", pad*1.3)
                 .attr("y", 30)
                 .style("fill", "rgb(50,50,50")
-                .style("font-family", "PT Sans")
+                .style("font-family", "Arial")
                 .style("font-size", "18px")
                 .text("time window: 2 years");
         svghud.append("text")
@@ -218,7 +226,7 @@ HTMLWidgets.widget({
                 .attr("x", w/3.9)
                 .attr("y", 30)
                 .style("fill", "rgb(50,50,50")
-                .style("font-family", "PT Sans")
+                .style("font-family", "Arial")
                 .style("font-size", "18px")
                 .text("marker window: " +  d3.round(mxtocov(mouse[0]), 2));
         svghud.selectAll("legenddots")
@@ -250,7 +258,7 @@ HTMLWidgets.widget({
                 .attr("x", w/2+10)
                 .attr("y", function(d){return d;})
                 .style("fill", "rgb(50,50,50)")
-                .style("font-family", "PT Sans")
+                .style("font-family", "Arial")
                 .style("font-size", "18px")
                 .text(function(d,i){
                     return i==0 ? "death" : "censored";
@@ -263,11 +271,11 @@ HTMLWidgets.widget({
                 .attr("x", w/1.45+5)
                 .attr("y", function(d){return d;})
                 .style("fill", "rgb(50,50,50)")
-                .style("font-family", "PT Sans")
+                .style("font-family", "Arial")
                 .style("font-size", "18px")
                 .text(function(d,i){
                     return i==0 ? "hazard rate" : "cumulative hazard";
-                });*/ 
+                }); 
         svghaz.append("path")
                 .datum(datasub)
                 .attr("class", "nahazline")
@@ -334,14 +342,14 @@ HTMLWidgets.widget({
             svg.select(".grayrect")
                     .attr("y", mouse[1]-covtoh(bm))
                     .attr("height", covtoh(mxtocov(mouse[0])));
-//            svghud.select("text.hudtxt")
-//                    .text("marker window: " +  d3.round(mxtocov(mouse[0]), 2));
+            svghud.select("text.hudtxt")
+                    .text("marker window: " +  d3.round(mxtocov(mouse[0]), 2));
             mouseold = mouse;
             refresh = 0;
         }
         setInterval(mgr, 10);
 
-/*        svgbut.on("click", function(){
+        svgbut.on("click", function(){
             freeze = 0;
             refresh = 1;
             var mt = d3.mouse(this)[0];
@@ -366,7 +374,7 @@ HTMLWidgets.widget({
             svg.select(".y.axis")
                     .transition().duration(1000)
                     .call(yAxis);
-        }); */
+        }); 
         svg.on("click", function(){
             if(freeze==0){
                 freeze=1;
